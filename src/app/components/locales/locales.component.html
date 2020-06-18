@@ -1,0 +1,37 @@
+<form
+  [formGroup]="localForm"
+  (ngSubmit)="data.setLocal(name, email, telefono, localidad)"
+>
+  <input
+    matInput
+    type="text"
+    placeholder="Nombre"
+    [(ngModel)]="name"
+    formControlName="name"
+  />
+  <input
+    matInput
+    type="email"
+    placeholder="Email"
+    [(ngModel)]="email"
+    formControlName="email"
+  />
+  <input
+    matInput
+    type="text"
+    placeholder="Telefono"
+    [(ngModel)]="telefono"
+    formControlName="telefono"
+  />
+  <input
+    matInput
+    type="text"
+    placeholder="Localidad"
+    [(ngModel)]="localidad"
+    formControlName="localidad"
+  />
+
+  <button mat-raised-button color="primary" type="submit">
+    Registrar Local
+  </button>
+</form>

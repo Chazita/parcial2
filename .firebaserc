@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "practica2-4a14a": {
+      "hosting": {
+        "parcial2": [
+          "practica2-4a14a"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<form
+  (ngSubmit)="auth.signUp(email, password, name)"
+  [formGroup]="registerForm"
+>
+  <input
+    matInput
+    type="email"
+    placeholder="Email"
+    [(ngModel)]="email"
+    formControlName="email"
+  />
+  <input
+    matInput
+    type="password"
+    placeholder="Password"
+    [(ngModel)]="password"
+    formControlName="password"
+  />
+  <input
+    matInput
+    type="text"
+    placeholder="Nombre"
+    [(ngModel)]="name"
+    formControlName="name"
+  />
+
+  <button mat-raised-button color="primary" type="submit">Registrar</button>
+</form>

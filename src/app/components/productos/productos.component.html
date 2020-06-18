@@ -1,0 +1,52 @@
+<form
+  [formGroup]="localForm"
+  (ngSubmit)="data.setProduto(name, marca, stock, tipo, local, precio)"
+>
+  <input
+    matInput
+    type="text"
+    placeholder="Nombre"
+    [(ngModel)]="name"
+    formControlName="name"
+  />
+  <input
+    matInput
+    type="text"
+    placeholder="Marca"
+    [(ngModel)]="marca"
+    formControlName="marca"
+  />
+
+  <input
+    matInput
+    type="text"
+    placeholder="Stock"
+    [(ngModel)]="stock"
+    formControlName="stock"
+  />
+  <input
+    matInput
+    type="text"
+    placeholder="Tipo"
+    [(ngModel)]="tipo"
+    formControlName="tipo"
+  />
+  <input
+    matInput
+    type="text"
+    placeholder="Local"
+    [(ngModel)]="local"
+    formControlName="local"
+  />
+  <input
+    matInput
+    type="text"
+    placeholder="Precio"
+    [(ngModel)]="precio"
+    formControlName="precio"
+  />
+
+  <button mat-raised-button color="primary" type="submit">
+    Registrar Producto
+  </button>
+</form>
