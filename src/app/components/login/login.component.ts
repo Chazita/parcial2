@@ -1,11 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormBuilder,
   FormControl,
   Validators,
+  NgForm,
+  FormGroupDirective,
 } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService } from '../../services/auth.service';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
 
 @Component({
   selector: 'app-login',
@@ -13,20 +28,26 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  email: string;
-  password: string;
-  loginForm: FormGroup;
+  matcher = new MyErrorStateMatcher();
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+  ]);
 
-  constructor(private fb: FormBuilder, public auth: AuthService) {}
+  constructor(public auth: AuthService) {}
 
-  ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      email: new FormControl(['', Validators.required, Validators.email]),
-      password: new FormControl([
-        '',
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-    });
+  ngOnInit(): void {}
+
+  Login() {
+    if (this.emailFormControl.value !== '' && this.passwordFormControl.value) {
+      this.auth.signIn(
+        this.emailFormControl.value,
+        this.passwordFormControl.value
+      );
+    }
   }
 }

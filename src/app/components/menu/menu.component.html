@@ -1,14 +1,15 @@
-<ul>
-  <div *ngIf="user != null">
-    <li><a routerLink="/home">Home</a></li>
-    <li><a routerLink="/registrar/local">Registrar Locales</a></li>
-    <li><a routerLink="/registrar/producto">Registrar Producto</a></li>
-    <li style="float: right;">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div *ngIf="user != null">
+      <a mat-button routerLink="/home">Home</a>
+      <a mat-button routerLink="/registrar/local">Registrar Locales</a>
+      <a mat-button routerLink="/registrar/producto">Registrar Producto</a>
       <span>{{ user }}</span>
-    </li>
-  </div>
-  <div *ngIf="user == null">
-    <li><a routerLink="/register">Registrar</a></li>
-    <li><a routerLink="/login">Iniciar Sesion</a></li>
-  </div>
-</ul>
+      <button mat-button (click)="logOut()">Cerrar Sesion</button>
+    </div>
+    <div *ngIf="!user">
+      <a mat-button routerLink="/register">Registrar</a>
+      <a mat-button routerLink="/login">Iniciar Sesion</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

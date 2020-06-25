@@ -12,4 +12,10 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.user = localStorage.getItem('userName');
   }
+
+  logOut() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('userName');
+    window.location.href = 'login';
+  }
 }

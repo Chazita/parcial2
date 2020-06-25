@@ -23,6 +23,7 @@ import { LocalesComponent } from './components/locales/locales.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { PdfComponent } from './components/pdf/pdf.component';
 import { CsvComponent } from './components/csv/csv.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,7 @@ import { CsvComponent } from './components/csv/csv.component';
     FormsModule,
     Ng2SmartTableModule,
     AngularFireDatabaseModule,
-    MatButtonModule,
-    MatInputModule,
-    MatToolbarModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

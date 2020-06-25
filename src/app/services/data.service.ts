@@ -37,6 +37,7 @@ export class DataService {
       `producto/${id}`
     );
     const proData = {
+      uid: id,
       nombre: nombre,
       marca: marca,
       stock: stock,
@@ -50,5 +51,11 @@ export class DataService {
 
   getProductos(): Observable<any[]> {
     return this.afStore.collection('producto').valueChanges();
+  }
+
+  updateProducto(id, value) {
+    const prodRef = this.afStore.doc(`producto/${id}`);
+    const proData = value;
+    prodRef.update(proData);
   }
 }

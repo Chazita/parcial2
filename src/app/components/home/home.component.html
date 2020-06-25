@@ -1,3 +1,9 @@
-<ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
-<app-pdf [table]="data"></app-pdf>
-<app-csv [data]="data"></app-csv>
+<ng2-smart-table
+  [settings]="settings"
+  [source]="data"
+  (editConfirm)="update($event)"
+></ng2-smart-table>
+<div style="margin-top: 50px;">
+  <app-pdf [table]="data"></app-pdf>
+  <app-csv [data]="data"></app-csv>
+</div>

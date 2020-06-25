@@ -39,6 +39,7 @@ export class AuthService {
       password
     );
     this.setDataUser(result.user, name);
+    window.location.href = 'login';
   }
 
   getDataUser(user) {

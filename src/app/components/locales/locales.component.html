@@ -1,37 +1,52 @@
-<form
-  [formGroup]="localForm"
-  (ngSubmit)="data.setLocal(name, email, telefono, localidad)"
->
+<form>
   <input
     matInput
     type="text"
     placeholder="Nombre"
-    [(ngModel)]="name"
-    formControlName="name"
+    [errorStateMatcher]="matcher"
+    [formControl]="nombre"
   />
+  <mat-error *ngIf="nombre.hasError('required')">
+    Nombre is <strong>required</strong>
+  </mat-error>
+
   <input
     matInput
     type="email"
     placeholder="Email"
-    [(ngModel)]="email"
-    formControlName="email"
+    [errorStateMatcher]="matcher"
+    [formControl]="email"
   />
+  <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+    Please enter a valid email address
+  </mat-error>
+  <mat-error *ngIf="email.hasError('required')">
+    Email is <strong>required</strong>
+  </mat-error>
+
   <input
     matInput
     type="text"
     placeholder="Telefono"
-    [(ngModel)]="telefono"
-    formControlName="telefono"
+    [errorStateMatcher]="matcher"
+    [formControl]="telefono"
   />
+  <mat-error *ngIf="telefono.hasError('required')">
+    Telefono is <strong>required</strong>
+  </mat-error>
+
   <input
     matInput
     type="text"
     placeholder="Localidad"
-    [(ngModel)]="localidad"
-    formControlName="localidad"
+    [errorStateMatcher]="matcher"
+    [formControl]="localidad"
   />
+  <mat-error *ngIf="localidad.hasError('required')">
+    Localidad is <strong>required</strong>
+  </mat-error>
 
-  <button mat-raised-button color="primary" type="submit">
+  <button mat-raised-button color="primary" type="submit" style="width: 100%;">
     Registrar Local
   </button>
 </form>

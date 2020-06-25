@@ -28,6 +28,13 @@ export class HomeComponent implements OnInit {
         title: 'Precio',
       },
     },
+    edit: {
+      confirmSave: true,
+    },
+    actions: {
+      add: false,
+      delete: false,
+    },
   };
 
   data;
@@ -38,5 +45,9 @@ export class HomeComponent implements OnInit {
       this.data = prod;
       console.log(this.data);
     });
+  }
+
+  update($event) {
+    this.dataService.updateProducto($event.data.uid, $event.newData);
   }
 }

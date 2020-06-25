@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
+import { MyErrorStateMatcher } from '../../class/my-error-state-matcher.class';
 
 @Component({
   selector: 'app-productos',
@@ -13,23 +9,34 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./productos.component.scss'],
 })
 export class ProductosComponent implements OnInit {
-  name: string;
-  marca: string;
-  stock: string;
-  tipo: string;
-  local: string;
-  precio: string;
-  localForm: FormGroup;
-  constructor(private fb: FormBuilder, public data: DataService) {}
+  matcher = new MyErrorStateMatcher();
 
-  ngOnInit(): void {
-    this.localForm = this.fb.group({
-      name: new FormControl(['', Validators.required]),
-      marca: new FormControl(['', Validators.required]),
-      stock: new FormControl(['', Validators.required]),
-      tipo: new FormControl(['', Validators.required]),
-      local: new FormControl(['', Validators.required]),
-      precio: new FormControl(['', Validators.required]),
-    });
+  nombreControl = new FormControl('', [Validators.required]);
+  marcaControl = new FormControl('', [Validators.required]);
+  stockControl = new FormControl('', [Validators.required]);
+  tipoControl = new FormControl('', [Validators.required]);
+  localControl = new FormControl('', [Validators.required]);
+  precioControl = new FormControl('', [Validators.required]);
+  constructor(public data: DataService) {}
+
+  ngOnInit(): void {}
+
+  registrar() {
+    const nombre = this.nombreControl.value;
+    const marca = this.marcaControl.value;
+    const stock = this.stockControl.value;
+    const tipo = this.tipoControl.value;
+    const local = this.localControl.value;
+    const precio = this.precioControl.value;
+    if (
+      nombre !== '' &&
+      marca !== '' &&
+      stock !== '' &&
+      tipo !== '' &&
+      local !== '' &&
+      precio !== ''
+    ) {
+      this.data.setProduto(nombre, marca, stock, tipo, local, precio);
+    }
   }
 }

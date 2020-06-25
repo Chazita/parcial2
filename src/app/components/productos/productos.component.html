@@ -1,52 +1,69 @@
-<form
-  [formGroup]="localForm"
-  (ngSubmit)="data.setProduto(name, marca, stock, tipo, local, precio)"
->
+<form (ngSubmit)="registrar()">
   <input
     matInput
     type="text"
     placeholder="Nombre"
-    [(ngModel)]="name"
-    formControlName="name"
+    [formControl]="nombreControl"
+    [errorStateMatcher]="matcher"
   />
+  <mat-error *ngIf="nombreControl.hasError('required')">
+    Nombre is <strong>required</strong>
+  </mat-error>
   <input
     matInput
     type="text"
     placeholder="Marca"
-    [(ngModel)]="marca"
-    formControlName="marca"
+    [formControl]="marcaControl"
+    [errorStateMatcher]="matcher"
   />
+  <mat-error *ngIf="marcaControl.hasError('required')">
+    Marca is <strong>required</strong>
+  </mat-error>
 
   <input
     matInput
     type="text"
+    [formControl]="stockControl"
     placeholder="Stock"
-    [(ngModel)]="stock"
-    formControlName="stock"
+    [errorStateMatcher]="matcher"
   />
+  <mat-error *ngIf="stockControl.hasError('required')">
+    Stock is <strong>required</strong>
+  </mat-error>
+
   <input
     matInput
     type="text"
     placeholder="Tipo"
-    [(ngModel)]="tipo"
-    formControlName="tipo"
+    [formControl]="tipoControl"
+    [errorStateMatcher]="matcher"
   />
+  <mat-error *ngIf="tipoControl.hasError('required')">
+    Tipo is <strong>required</strong>
+  </mat-error>
+
   <input
     matInput
     type="text"
     placeholder="Local"
-    [(ngModel)]="local"
-    formControlName="local"
+    [formControl]="localControl"
+    [errorStateMatcher]="matcher"
   />
+  <mat-error *ngIf="localControl.hasError('required')">
+    Local is <strong>required</strong>
+  </mat-error>
   <input
     matInput
     type="text"
     placeholder="Precio"
-    [(ngModel)]="precio"
-    formControlName="precio"
+    [formControl]="precioControl"
+    [errorStateMatcher]="matcher"
   />
+  <mat-error *ngIf="precioControl.hasError('required')">
+    Precio is <strong>required</strong>
+  </mat-error>
 
-  <button mat-raised-button color="primary" type="submit">
+  <button mat-raised-button color="primary" type="submit" style="width: 100%;">
     Registrar Producto
   </button>
 </form>

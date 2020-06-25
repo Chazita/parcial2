@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
+import { MyErrorStateMatcher } from '../../class/my-error-state-matcher.class';
 
 @Component({
   selector: 'app-locales',
@@ -13,22 +9,26 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./locales.component.scss'],
 })
 export class LocalesComponent implements OnInit {
-  email: string;
-  telefono: string;
-  name: string;
-  localidad: string;
-  localForm: FormGroup;
-  constructor(private fb: FormBuilder, public data: DataService) {}
+  matcher = new MyErrorStateMatcher();
 
-  ngOnInit(): void {
-    this.localForm = this.fb.group({
-      email: new FormControl(['', Validators.required, Validators.email]),
-      name: new FormControl(['', Validators.required]),
-      telefono: new FormControl(
-        ['', Validators.required],
-        Validators.maxLength(10)
-      ),
-      localidad: new FormControl(['', Validators.required]),
-    });
+  nombre = new FormControl('', [Validators.required]);
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+  telefono = new FormControl('', [Validators.required]);
+  localidad = new FormControl('', [Validators.required]);
+
+  constructor(public data: DataService) {}
+
+  ngOnInit(): void {}
+
+  registrar() {
+    const nombre = this.nombre.value;
+    const email = this.email.value;
+    const telefono = this.telefono.value;
+    const localidad = this.localidad.value;
+
+    if (nombre !== '' && email !== '' && telefono !== '' && localidad !== '') {
+      this.data.setLocal(nombre, email, telefono, localidad);
+    }
   }
 }

@@ -1,28 +1,53 @@
-<form
-  (ngSubmit)="auth.signUp(email, password, name)"
-  [formGroup]="registerForm"
->
+<form (ngSubmit)="Register()">
   <input
     matInput
     type="email"
     placeholder="Email"
-    [(ngModel)]="email"
-    formControlName="email"
+    [formControl]="emailFormControl"
   />
+
+  <mat-error
+    *ngIf="
+      emailFormControl.hasError('email') &&
+      !emailFormControl.hasError('required')
+    "
+  >
+    Please enter a valid email address
+  </mat-error>
+  <mat-error *ngIf="emailFormControl.hasError('required')">
+    Email is <strong>required</strong>
+  </mat-error>
+
   <input
     matInput
     type="password"
     placeholder="Password"
-    [(ngModel)]="password"
-    formControlName="password"
+    [formControl]="passwordFormControl"
   />
+
+  <mat-error
+    *ngIf="
+      passwordFormControl.hasError('minLength') &&
+      !passwordFormControl.hasError('required')
+    "
+  >
+    Please enter a password longer or 6 characters
+  </mat-error>
+  <mat-error *ngIf="passwordFormControl.hasError('required')">
+    Password is <strong>required</strong>
+  </mat-error>
+
   <input
     matInput
     type="text"
     placeholder="Nombre"
-    [(ngModel)]="name"
-    formControlName="name"
+    [formControl]="userNameFormControl"
   />
+  <mat-error *ngIf="userNameFormControl.hasError('required')">
+    Username is <strong>required</strong>
+  </mat-error>
 
-  <button mat-raised-button color="primary" type="submit">Registrar</button>
+  <button mat-raised-button color="primary" type="submit" style="width: 100%;">
+    Registrar
+  </button>
 </form>
